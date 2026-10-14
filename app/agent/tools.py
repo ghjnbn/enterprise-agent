@@ -1,4 +1,4 @@
-def check_server_status(server_name: str):
+def check_service(server_name: str):
 
     """
     模拟查询服务器状态
@@ -6,7 +6,8 @@ def check_server_status(server_name: str):
 
     return {
         "server": server_name,
-        "status": "running"
+        "status": "running",
+        "message": "service is healthy"
     }
 
 
