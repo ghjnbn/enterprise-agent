@@ -1,16 +1,55 @@
-# Python virtual environment
-.venv/
+# =====================
+# Python
+# =====================
 
-# Environment variables
-.env
+# Virtual environment
+.venv/
 
 # Python cache
 __pycache__/
-*.pyc
+*.py[cod]
 
+
+# =====================
+# Environment
+# =====================
+
+.env
+.env.*
+
+
+# =====================
 # IDE
-.vscode/
+# =====================
 
+.vscode/
+.idea/
+
+
+# =====================
 # OS
+# =====================
+
 .DS_Store
 Thumbs.db
+
+
+# =====================
+# Data
+# =====================
+
+data/*
+!data/.gitkeep
+
+# =====================
+# Logs
+# =====================
+
+*.log
+
+
+# =====================
+# Jupyter
+# =====================
+
+.ipynb_checkpoints/
