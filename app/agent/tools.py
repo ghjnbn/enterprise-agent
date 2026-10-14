@@ -1,10 +1,22 @@
-from langchain_core.tools import tool
+def check_server_status(server_name: str):
 
-
-@tool
-def get_weather(city: str):
     """
-    查询城市天气
+    模拟查询服务器状态
     """
 
-    return f"{city}今天晴天，温度25度"
+    return {
+        "server": server_name,
+        "status": "running"
+    }
+
+
+def restart_service(service_name: str):
+
+    """
+    模拟重启服务
+    """
+
+    return {
+        "service": service_name,
+        "result": "restart success"
+    }

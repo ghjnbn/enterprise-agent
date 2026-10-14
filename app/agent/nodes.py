@@ -1,38 +1,42 @@
-from langchain_openai import ChatOpenAI
-
 from app.agent.state import AgentState
-from app.agent.tools import get_weather
 
-from app.config.settings import (
-    DEEPSEEK_API_KEY,
-    MODEL_NAME,
-    BASE_URL
-)
+from app.agent.tools import restart_service
 
 
-llm = ChatOpenAI(
-    model=MODEL_NAME,
-    api_key=DEEPSEEK_API_KEY,
-    base_url=BASE_URL
-)
+def analyze_ticket(state: AgentState):
+
+    """
+    工单分析节点
+    """
+
+    description = state["description"]
 
 
-tools=[
-    get_weather
-]
+    if "服务" in description:
+
+        state["category"] = "service_issue"
+
+        state["action"] = "restart_service"
 
 
-llm_with_tools = llm.bind_tools(
-    tools
-)
+    return state
 
 
-def chatbot(state: AgentState):
 
-    response = llm_with_tools.invoke(
-        state["messages"]
-    )
+def execute_action(state: AgentState):
 
-    return {
-        "messages":[response]
-    }
+    """
+    工具执行节点
+    """
+
+
+    if state["action"] == "restart_service":
+
+        result = restart_service(
+            "nginx"
+        )
+
+        state["result"] = str(result)
+
+
+    return state

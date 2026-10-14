@@ -1,89 +1,43 @@
-from langgraph.graph import (
-    StateGraph,
-    END
-)
-
-from langgraph.prebuilt import (
-    ToolNode,
-    tools_condition
-)
-
+from langgraph.graph import StateGraph, END
 
 from app.agent.state import AgentState
 
-from app.agent.nodes import chatbot
-
-from app.agent.tools import get_weather
-
-
-
-# 注册工具
-
-tools = [
-    get_weather
-]
-
-
-# 创建ToolNode
-
-tool_node = ToolNode(
-    tools
+from app.agent.nodes import (
+    analyze_ticket,
+    execute_action
 )
 
 
+builder = StateGraph(AgentState)
 
-# 创建Graph
 
-graph_builder = StateGraph(
-    AgentState
+builder.add_node(
+    "analyze",
+    analyze_ticket
 )
 
 
-
-# 添加LLM节点
-
-graph_builder.add_node(
-    "chatbot",
-    chatbot
+builder.add_node(
+    "execute",
+    execute_action
 )
 
 
-
-# 添加Tool节点
-
-graph_builder.add_node(
-    "tools",
-    tool_node
+builder.set_entry_point(
+    "analyze"
 )
 
 
-
-# 设置入口
-
-graph_builder.set_entry_point(
-    "chatbot"
+builder.add_edge(
+    "analyze",
+    "execute"
 )
 
 
-
-# 条件边
-
-graph_builder.add_conditional_edges(
-    "chatbot",
-    tools_condition
+builder.add_edge(
+    "execute",
+    END
 )
 
 
-
-# 工具执行后返回LLM
-
-graph_builder.add_edge(
-    "tools",
-    "chatbot"
-)
-
-
-
-# 编译
-
-graph = graph_builder.compile()
+graph = builder.compile()

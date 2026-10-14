@@ -1,11 +1,17 @@
-from typing import TypedDict, Annotated
-
-from langgraph.graph.message import add_messages
+from typing import TypedDict
 
 
 class AgentState(TypedDict):
+    """
+    Agent运行状态
+    """
 
-    messages: Annotated[
-        list,
-        add_messages
-    ]
+    ticket_id: str
+
+    description: str
+
+    category: str
+
+    action: str
+
+    result: str
