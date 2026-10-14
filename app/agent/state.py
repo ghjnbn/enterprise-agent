@@ -2,9 +2,6 @@ from typing import TypedDict
 
 
 class AgentState(TypedDict):
-    """
-    Agent运行状态
-    """
 
     ticket_id: str
 
@@ -15,3 +12,6 @@ class AgentState(TypedDict):
     action: str
 
     result: str
+
+
+    analysis: str

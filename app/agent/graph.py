@@ -3,7 +3,7 @@ from langgraph.graph import StateGraph, END
 from app.agent.state import AgentState
 
 from app.agent.nodes import (
-    analyze_ticket,
+    llm_analyze_ticket,
     execute_action
 )
 
@@ -13,7 +13,7 @@ builder = StateGraph(AgentState)
 
 builder.add_node(
     "analyze",
-    analyze_ticket
+    llm_analyze_ticket
 )
 
 

@@ -11,7 +11,6 @@ DEEPSEEK_API_KEY = os.getenv(
 )
 
 
-MODEL_NAME = "deepseek-chat"
-
-
-BASE_URL = "https://api.deepseek.com"
+DEEPSEEK_BASE_URL = os.getenv(
+    "DEEPSEEK_BASE_URL"
+)
